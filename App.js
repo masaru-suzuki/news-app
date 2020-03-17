@@ -1,19 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import AppNavigator from './navigation/AppNavigator';
+// redux
+import {Provider} from 'react-redux';
+import store from './store';
+// reduxの永続化
+import {PesistGate, PersistGate} from 'redux-persist/integration/react';
+import { persistor } from './store';
 
 export default function App() {
+  // reduxはproviderタグで囲う
   return (
-    <View style={styles.container}>
-      <Text>ReactNative</Text>
-    </View>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppNavigator />
+      </PersistGate>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
